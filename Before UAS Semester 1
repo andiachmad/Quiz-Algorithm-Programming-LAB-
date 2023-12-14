@@ -1,0 +1,72 @@
+#include <stdio.h>
+//Codingan milik Andi Achmad Yanuar, NIM 2702262034
+int display_data(char nama[100][100]){
+	
+	FILE *tampilkan =  fopen("nama.txt", "r");
+	if(tampilkan == NULL){
+		printf("Gagal Membaca Data\n");
+		return 1;
+	}
+	
+	int i = 0;
+	do{
+		fscanf(tampilkan, " %[^\n]", nama[i]);
+		i++;
+	}while(!feof(tampilkan));
+	
+	for(int j = 0; j < i; j++){
+		printf("%s\n", nama[j]);
+	}
+	
+	fclose(tampilkan);
+}
+//Codingan milik Andi Achmad Yanuar, NIM 2702262034
+int append_file(char bebek [100]){
+	
+	FILE *tampilkan = fopen("nama.txt", "a+");
+	if(tampilkan == NULL){
+		printf("Gagal Membaca Data\n");
+		return 1;
+	}
+	
+	if(fprintf(tampilkan, "%s\n", bebek) != 0){
+		printf("Nama baru : %s berhasil ditambahkan\n", bebek);
+	}
+	
+	fclose(tampilkan);
+}
+//Codingan milik Andi Achmad Yanuar, NIM 2702262034
+int main() {
+	
+	int a;
+	char bebek[101];
+	char nama[100][100];
+	
+	printf("===================================================\n");
+	printf("------------ Program Management Nama --------------\n");
+	printf("===================================================\n");
+	
+	printf("1. Tampilkan daftar nama\n", a);
+	printf("2. Tambahkan nama baru ke file\n", a);
+	printf("3. Exit\n\n", a);
+	
+	printf("Pilih Menu: ", a);
+	scanf("%d", &a);
+	
+	switch(a){
+		case 1:
+			display_data(nama);
+			printf("\n");
+			break;
+		case 2:
+			printf("Masukan nama baru: ");
+			scanf(" %[^\n]", bebek);
+			append_file(bebek);
+			break;
+		case 3:
+			break;
+	}
+	
+	//Codingan milik Andi Achmad Yanuar, NIM 2702262034
+	return 0;
+}
